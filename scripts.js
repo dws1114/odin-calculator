@@ -30,16 +30,18 @@ function operate(operaterFunction, num1, num2) {
 };
 
 
-const buttons = document.querySelectorAll("button");
+const digits = document.querySelectorAll(".digit");
 
 let display = document.querySelector(".display");
 
 let prevNumDisplay = [];
 
-buttons.forEach(button => {
+digits.forEach(button => {
   button.addEventListener("click", () => {
       let displayText = button.innerText;
       prevNumDisplay.push(displayText);
       display.innerText = prevNumDisplay.join("");
   });
 });
+
+let prevNum = parseInt(prevNumDisplay.join(""));
