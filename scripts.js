@@ -56,10 +56,10 @@ digits.forEach(button => {
 operators.forEach(button => {
   button.addEventListener("click", () => {
     operator = button.innerText;
-    if (prevNum === 0) {
+    if (prevNumDisplay.length === 0) {
       prevNum = 0;
     } else {
-      prevNum = parsein(prevNumDisplay.join(""));
+      prevNum = parseInt(prevNumDisplay.join(""));
     }
     nextNum = 0;
     nextNumDisplay.splice(0);
