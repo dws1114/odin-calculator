@@ -1,4 +1,4 @@
-// Operater functions
+//Operator functions
 
 function add(num1, num2) {
   return num1 + num2;
@@ -26,15 +26,24 @@ function operate(operaterFunction, num1, num2) {
           return multiply(num1, num2);
       case "/":
           return divide(num1, num2);
+      case "%":
+          return divide(num1, 100);
+      case "+ / -":
+          return multiply(num1, -1);
   }
 };
 
 
 const digits = document.querySelectorAll(".digit");
+const operators = document.querySelectorAll(".operator");
 
-let display = document.querySelector(".display");
+const display = document.querySelector(".display");
 
 let prevNumDisplay = [];
+let nextNumDisplay = [];
+let prevNum = "";
+let nextNum = "";
+let operator = "";
 
 digits.forEach(button => {
   button.addEventListener("click", () => {
@@ -43,5 +52,3 @@ digits.forEach(button => {
       display.innerText = prevNumDisplay.join("");
   });
 });
-
-let prevNum = parseInt(prevNumDisplay.join(""));
