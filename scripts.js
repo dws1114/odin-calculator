@@ -41,8 +41,8 @@ const display = document.querySelector(".display");
 
 let prevNumDisplay = [];
 let nextNumDisplay = [];
-let prevNum = "";
-let nextNum = "";
+let prevNum = 0;
+let nextNum = 0;
 let operator = "";
 
 digits.forEach(button => {
@@ -50,5 +50,20 @@ digits.forEach(button => {
       let displayText = button.innerText;
       prevNumDisplay.push(displayText);
       display.innerText = prevNumDisplay.join("");
+  });
+});
+
+operators.forEach(button => {
+  button.addEventListener("click", () => {
+    operator = button.innerText;
+    if (prevNum === 0) {
+      prevNum = 0;
+    } else {
+      prevNum = parsein(prevNumDisplay.join(""));
+    }
+    nextNum = 0;
+    nextNumDisplay.splice(0);
+    prevNumDisplay.splice(0);
+    display.innerText = nextNumDisplay.join("");
   });
 });
