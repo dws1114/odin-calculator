@@ -34,10 +34,14 @@ function operate(operaterFunction, num1, num2) {
   }
 };
 
-
-function debugText() {
-  console.log(`Num Display:${numDisplay}, num:${num}, prevNum:${prevNum}, nextNum:${nextNum}, operator:${operator}`);
-}
+function clearAll() {
+  numDisplay = [];
+  num = null;
+  prevNum = null;
+  nextNum = null;
+  operator = null;
+  display.innerText = "";
+};
 
 const digits = document.querySelectorAll(".digit");
 const operators = document.querySelectorAll(".operator");
@@ -57,10 +61,15 @@ let operator = null;
 
 digits.forEach(button => {
   button.addEventListener("click", () => {
+      if (operator === "=") {
+        clearAll();
+      }
+
       let displayText = button.innerText;
       numDisplay.push(displayText);
       display.innerText = numDisplay.join("");
       num = parseInt(numDisplay.join(""));
+      equalsBtn.disabled = false;
   });
 });
 
@@ -71,6 +80,8 @@ operators.forEach(button => {
       operator = button.innerText;
       numDisplay.splice(0);
       display.innerText = prevNum;
+    } else if (operator === "=") {
+      operator = button.innerText;
     } else {
       nextNum = num;
       num = operate(operator, prevNum, nextNum);
@@ -87,7 +98,10 @@ equalsBtn.addEventListener("click", () => {
   num = operate(operator, prevNum, nextNum);
   prevNum = num;
   display.innerText = prevNum;
+  nextNum = null;
+  operator = "="
   numDisplay.splice(0);
+  equalsBtn.disabled = true;
 });
 
 decimalBtn.addEventListener("click", () => {
@@ -110,11 +124,4 @@ backBtn.addEventListener("click", () => {
   display.innerText = num;
 });
 
-clearBtn.addEventListener("click", () => {
-  numDisplay = [];
-  num = null;
-  prevNum = null;
-  nextNum = null;
-  operator = null;
-  display.innerText = "";
-});
+clearBtn.addEventListener("click", clearAll);
