@@ -40,10 +40,14 @@ function debugText() {
 }
 
 const digits = document.querySelectorAll(".digit");
-
 const operators = document.querySelectorAll(".operator");
-
-const display = document.querySelector(".display");
+const display = document.querySelector(".display")
+const decimalBtn = document.querySelector("#decimal");
+const negativeBtn = document.querySelector("#negative");
+const percentBtn = document.querySelector("#percent");
+const backBtn = document.querySelector("#back");
+const clearBtn = document.querySelector("#clear");
+const equalsBtn = document.querySelector("#equals");
 
 let numDisplay = [];
 let num = null;
@@ -57,7 +61,6 @@ digits.forEach(button => {
       numDisplay.push(displayText);
       display.innerText = numDisplay.join("");
       num = parseInt(numDisplay.join(""));
-      debugText();
   });
 });
 
@@ -68,7 +71,6 @@ operators.forEach(button => {
       operator = button.innerText;
       numDisplay.splice(0);
       display.innerText = prevNum;
-      debugText();
     } else {
       nextNum = num;
       num = operate(operator, prevNum, nextNum);
@@ -76,7 +78,43 @@ operators.forEach(button => {
       operator = button.innerText;
       display.innerText = prevNum;
       numDisplay.splice(0);
-      debugText();
     }
   });
+});
+
+equalsBtn.addEventListener("click", () => {
+  nextNum = num;
+  num = operate(operator, prevNum, nextNum);
+  prevNum = num;
+  display.innerText = prevNum;
+  numDisplay.splice(0);
+});
+
+decimalBtn.addEventListener("click", () => {
+  alert("Decimal button currently inoperable. Coming soon.")
+});
+
+negativeBtn.addEventListener("click", () => {
+  num = multiply(num, -1);
+  display.innerText = num;
+});
+
+percentBtn.addEventListener("click", () => {
+  num = divide(num, 100);
+  display.innerText = num;
+});
+
+backBtn.addEventListener("click", () => {
+  numDisplay.splice(-1, 1);
+  num = parseInt(numDisplay.join(""));
+  display.innerText = num;
+});
+
+clearBtn.addEventListener("click", () => {
+  numDisplay = [];
+  num = null;
+  prevNum = null;
+  nextNum = null;
+  operator = null;
+  display.innerText = "";
 });
