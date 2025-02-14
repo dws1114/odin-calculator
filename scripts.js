@@ -52,12 +52,19 @@ const percentBtn = document.querySelector("#percent");
 const backBtn = document.querySelector("#back");
 const clearBtn = document.querySelector("#clear");
 const equalsBtn = document.querySelector("#equals");
+const toggled = document.querySelectorAll(".t");
 
 let numDisplay = [];
 let num = null;
 let prevNum = null;
 let nextNum = null;
 let operator = null;
+
+function toggleOperators(boolean) {
+  toggled.forEach(button => {
+    button.disabled = boolean;
+  });
+};
 
 digits.forEach(button => {
   button.addEventListener("click", () => {
@@ -70,6 +77,7 @@ digits.forEach(button => {
       display.innerText = numDisplay.join("");
       num = parseInt(numDisplay.join(""));
       equalsBtn.disabled = false;
+      toggleOperators(false);
   });
 });
 
@@ -90,6 +98,7 @@ operators.forEach(button => {
       display.innerText = prevNum;
       numDisplay.splice(0);
     }
+    toggleOperators(true);
   });
 });
 
@@ -124,4 +133,4 @@ backBtn.addEventListener("click", () => {
   display.innerText = num;
 });
 
-clearBtn.addEventListener("click", clearAll);
+clearBtn.addEventListener("click", clearAll)
