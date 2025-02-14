@@ -1,3 +1,22 @@
+//Variables
+
+const digits = document.querySelectorAll(".digit");
+const operators = document.querySelectorAll(".operator");
+const display = document.querySelector(".display")
+const decimalBtn = document.querySelector("#decimal");
+const negativeBtn = document.querySelector("#negative");
+const percentBtn = document.querySelector("#percent");
+const backBtn = document.querySelector("#back");
+const clearBtn = document.querySelector("#clear");
+const equalsBtn = document.querySelector("#equals");
+const toggled = document.querySelectorAll(".t");
+
+let numDisplay = [];
+let num = null;
+let prevNum = null;
+let nextNum = null;
+let operator = null;
+
 //Operator functions
 
 function add(num1, num2) {
@@ -34,37 +53,24 @@ function operate(operaterFunction, num1, num2) {
   }
 };
 
+//Caclulator functions
+
 function clearAll() {
   numDisplay = [];
   num = null;
   prevNum = null;
   nextNum = null;
   operator = null;
+  toggleOperators(false);
   display.innerText = "";
 };
-
-const digits = document.querySelectorAll(".digit");
-const operators = document.querySelectorAll(".operator");
-const display = document.querySelector(".display")
-const decimalBtn = document.querySelector("#decimal");
-const negativeBtn = document.querySelector("#negative");
-const percentBtn = document.querySelector("#percent");
-const backBtn = document.querySelector("#back");
-const clearBtn = document.querySelector("#clear");
-const equalsBtn = document.querySelector("#equals");
-const toggled = document.querySelectorAll(".t");
-
-let numDisplay = [];
-let num = null;
-let prevNum = null;
-let nextNum = null;
-let operator = null;
 
 function toggleOperators(boolean) {
   toggled.forEach(button => {
     button.disabled = boolean;
   });
 };
+toggleOperators(true);
 
 digits.forEach(button => {
   button.addEventListener("click", () => {
